@@ -14,7 +14,7 @@ The **Moodle Media CloudStudio** integrates the CloudStudio player into any area
 - Moodle 3.9 or higher.
 - Mandatory dependency: **[CloudStudio (moodle-mod_cloudstudio)](https://github.com/eadtech-moodle/moodle-mod_cloudstudio)**. Ensure this module is installed and configured before using this plugin.
 
-## 🔧 Installation
+## Installation
 
 ### 1. Download the plugin
 
