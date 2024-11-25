@@ -25,8 +25,6 @@
 
 namespace media_cloudstudio\local;
 
-use \Exception;
-
 /**
  * Class jwt
  *
@@ -76,7 +74,7 @@ class jwt {
 
         try {
             $signature = self::sign($signinginput, $key, $alg);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return "";
         }
         $segments[] = self::urlsafe_b64_encode($signature);
@@ -94,11 +92,11 @@ class jwt {
      *
      * @return string An encrypted message
      *
-     * @throws Exception Unsupported algorithm was specified
+     * @throws \Exception Unsupported algorithm was specified
      */
     private static function sign($msg, $key, $alg = "HS256") {
         if (empty(self::$supportedalgs[$alg])) {
-            throw new Exception("Algoritmo não suportado");
+            throw new \Exception("Algoritmo não suportado");
         }
         list($function, $algorithm) = self::$supportedalgs[$alg];
         switch ($function) {
