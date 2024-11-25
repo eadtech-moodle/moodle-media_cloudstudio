@@ -31,6 +31,22 @@ namespace media_cloudstudio\local;
  * @package media_cloudstudio
  */
 class cloudstudio_media_video {
+
+    public function getUrl() {
+        $config = get_config("cloudstudio");
+        $url = trim($config->urlcloudstidio);
+        if (!preg_match('/^https?:/', $url)) {
+            $url = "http://{$url}";
+        }
+        $url = parse_url($url, PHP_URL_HOST);
+
+        if ($url != $config->urlcloudstidio) {
+            set_config("urlcloudstidio", $url, "cloudstudio");
+        }
+
+        return $url;
+    }
+
     /**
      * Call for list videos in cloudstudio.
      *
@@ -65,7 +81,7 @@ class cloudstudio_media_video {
      * @throws \dml_exception
      */
     public static function getplayer($cmid, $identifier, $safetyplayer) {
-        global $USER, $OUTPUT;
+        global $USER, $OUTPUT, $PAGE;
         $config = get_config("cloudstudio");
 
         $payload = [
@@ -79,7 +95,12 @@ class cloudstudio_media_video {
         require_once(__DIR__ . "/jwt.php");
         $token = jwt::encode($config->token, $payload);
 
+        $PAGE->requires->js_call_amd("media_cloudstudio/player", "resize", [$identifier]);
         return $OUTPUT->render_from_template("media_cloudstudio/player", [
+            "tags" => [
+                'sandbox="allow-scripts allow-same-origin allow-popups"',
+                'allow=":encrypted-media; :picture-in-picture"',
+            ],
             "identifier" => $identifier,
             "token" => $token,
             "url" => $config->url,
