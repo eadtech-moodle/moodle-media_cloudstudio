@@ -135,8 +135,8 @@ class media_cloudstudio_plugin extends core_media_player_external {
      */
     public function is_enabled() {
         $config = get_config("cloudstudio");
-        if (!$config->token) { // phpcs:disable
-            // return false;
+        if (!isset($config->urlcloudstidio[5])) {
+            return false;
         }
 
         return true;
