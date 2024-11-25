@@ -25,10 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024011901;      // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires = 2022111800;      // Requires this Moodle version.
-$plugin->component = "media_cloudstudio"; // Full name of the plugin (used for diagnostics).
+$plugin->version = 2024102400;
+$plugin->requires = 2022111800;
+$plugin->component = "media_cloudstudio";
+$plugin->release = '1.0.0';
 
 $plugin->dependencies = [
-    "mod_cloudstudio" => 2024102401,
+    "mod_cloudstudio" => 2024102400,
 ];
