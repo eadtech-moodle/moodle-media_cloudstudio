@@ -1,0 +1,70 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+
+{{!
+    @template media_cloudstudio/player
+
+    Example context (json):
+    {
+        "identifier": "identifier",
+        "token": "token",
+        "url": "url"
+    }
+}}
+<div style="width:100%;display: flex;justify-content: center;">
+    <iframe id="ottflix-iframe-{{{identifier}}}"
+            width="100%" style="height: calc(100vw * 0.563);"
+            frameborder="0" allowfullscreen
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            allow=":encrypted-media; :picture-in-picture"
+            src="https://{{url}}/Share/player/{{identifier}}?token={{token}}"></iframe>
+</div>
+
+{{#js}}
+    //<script>
+    require(["jquery"], function($) {
+        function resize{{{identifier}}}() {
+            var newHeight = $(window).height() - 100;
+            if (newHeight < 300) newHeight = 300;
+            if (lastHeight > lastHeight) newHeight = lastHeight;
+            if (newHeight < lastHeight) {
+                $("#ottflix-iframe-{{{identifier}}}").css({
+                    height : newHeight + "px",
+                    width  : "100%",
+                });
+            } else {
+                var newVidth = (newHeight / 9) * 16;
+                if (newVidth > $(window).width()) {
+                    var newHeight2 = ($(window).width() / 16) * 9;
+                    $("#ottflix-iframe-{{{identifier}}}").css({
+                        height : newHeight2 + "px",
+                        width  : "100%",
+                    });
+                } else {
+                    $("#ottflix-iframe-{{{identifier}}}").css({
+                        height : newHeight + "px",
+                        width  : newVidth + "px",
+                    });
+                }
+            }
+        }
+
+        var lastHeight = $("#ottflix-iframe-{{{identifier}}}").height();
+        $(window).resize(resize{{{identifier}}});
+        resize{{{identifier}}}();
+    });
+{{/js}}
