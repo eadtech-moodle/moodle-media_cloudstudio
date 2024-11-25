@@ -29,7 +29,7 @@ git clone https://github.com/eadtech-moodle/moodle-media_cloudstudio.git
 - Extract or copy the plugin folder to the following path in your Moodle:
 
   ```plaintext
-  [Moodle_Directory]/local/media_cloudstudio
+  [Moodle_Directory]/media/player/cloudstudio
   ```
 
 ### 3. Complete the installation
@@ -42,7 +42,7 @@ git clone https://github.com/eadtech-moodle/moodle-media_cloudstudio.git
 
 After installation, follow these steps to enable the player:
 
-1. Go to **Site Administration > Media Players > Manage Media Players**.
+1. Go to **Site Administration** > **Media Players** > **Manage Media Players**.
 2. Activate the **CloudStudio Filter Player** option.
 
 ## How to Use
