@@ -38,7 +38,7 @@ class media_cloudstudio_plugin extends core_media_player_external {
      *
      * @return array
      */
-    public function list_supported_urls(array $urls, array $options = array()) {
+    public function list_supported_urls(array $urls, array $options = []) {
         $result = [];
         foreach ($urls as $url) {
             // If cloudstudio support is enabled, URL is supported.
@@ -112,7 +112,7 @@ class media_cloudstudio_plugin extends core_media_player_external {
     public function get_embeddable_markers() {
         $markers = [
             "cloudstudio.com.br",
-            "player.cloudstudio.com.br"
+            "player.cloudstudio.com.br",
         ];
 
         return $markers;
@@ -135,7 +135,7 @@ class media_cloudstudio_plugin extends core_media_player_external {
      */
     public function is_enabled() {
         $config = get_config("cloudstudio");
-        if (!$config->token) {
+        if (!$config->token) { // phpcs:disable
             // return false;
         }
 

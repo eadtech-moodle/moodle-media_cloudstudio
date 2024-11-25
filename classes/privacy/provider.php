@@ -25,9 +25,6 @@
 
 namespace media_cloudstudio\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
-
 /**
  * Class provider
  *
