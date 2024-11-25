@@ -32,7 +32,12 @@ namespace media_cloudstudio\local;
  */
 class cloudstudio_media_video {
 
-    public function getUrl() {
+    /**
+     * Function getUrl
+     *
+     * @return mixed|string
+     */
+    public static function getUrl() {
         $config = get_config("cloudstudio");
         $url = trim($config->urlcloudstidio);
         if (!preg_match('/^https?:/', $url)) {
@@ -103,7 +108,7 @@ class cloudstudio_media_video {
             ],
             "identifier" => $identifier,
             "token" => $token,
-            "url" => $config->url,
+            "url" => self::getUrl(),
         ]);
     }
 
@@ -134,7 +139,8 @@ class cloudstudio_media_video {
             $queryurl = "?{$query}";
         }
 
-        curl_setopt($ch, CURLOPT_URL, "https://{$config->url}/{$baseurl}{$queryurl}");
+        $url = self::getUrl();
+        curl_setopt($ch, CURLOPT_URL, "https://{$url}/{$baseurl}{$queryurl}");
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $protocol);
 
