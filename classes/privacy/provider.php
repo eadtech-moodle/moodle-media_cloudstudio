@@ -25,20 +25,44 @@
 
 namespace media_cloudstudio\privacy;
 
+use core_privacy\local\metadata\collection;
+use core_privacy\local\request\approved_contextlist;
+use core_privacy\local\request\approved_userlist;
+use core_privacy\local\request\contextlist;
+use core_privacy\local\request\helper;
+use core_privacy\local\request\transform;
+use core_privacy\local\request\userlist;
+use core_privacy\local\request\writer;
+
 /**
  * Class provider
  *
- * @package media_cloudstudio\privacy
+ * @package mod_cloudstudio\privacy
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+class provider implements
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
 
     /**
-     * Get the language string identifier with the component's language
-     * file to explain why this plugin stores no data.
+     * Returns metadata.
      *
-     * @return  string
+     * @param collection $collection The initialised collection to add items to.
+     *
+     * @return collection A listing of user data stored through this system.
      */
-    public static function get_reason(): string {
-        return "privacy:metadata";
+    public static function get_metadata(collection $collection): collection {
+
+        $collection->add_external_location_link(
+            'cloudstudio.com.br',
+            [
+                'aluno_matricula' => 'privacy:metadata:cloudstudio_view:user_id',
+                'aluno_nome' => 'privacy:metadata:cloudstudio_view:user_name',
+                'aluno_email' => 'privacy:metadata:cloudstudio_view:user_email',
+            ],
+            'privacy:metadata:cloudstudio_view',
+            );
+
+        return $collection;
     }
 }
