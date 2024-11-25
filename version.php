@@ -26,9 +26,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version = 2024102400;
-$plugin->requires = 2021111800;
+$plugin->requires = 2020061500;
 $plugin->component = "media_cloudstudio";
-$plugin->release = '1.0.1';
+$plugin->release = '1.0.2';
 $plugin->maturity = MATURITY_STABLE;
 
 $plugin->dependencies = [
