@@ -27,6 +27,8 @@
 }}
 <div style="width:100%;display: flex;justify-content: center;">
     <iframe id="ottflix-iframe-{{{identifier}}}"
-            {{#tags}}{{.}}{{/tags}}
+            {{#tags}}
+                {{{.}}}
+            {{/tags}}
             src="https://{{url}}/Share/player/{{identifier}}?token={{token}}"></iframe>
 </div>

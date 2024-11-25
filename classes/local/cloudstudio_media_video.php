@@ -53,29 +53,6 @@ class cloudstudio_media_video {
     }
 
     /**
-     * Call for list videos in cloudstudio.
-     *
-     * @param int $page
-     * @param int $pasta
-     * @param string $titulo
-     *
-     * @return array
-     * @throws \dml_exception
-     */
-    public static function listing($page, $pasta, $titulo) {
-        $post = [
-            "page" => $page,
-            "pastaid" => $pasta,
-            "titulo" => $titulo,
-        ];
-
-        $baseurl = "api/v2/video";
-        $json = self::load($baseurl, $post, "GET");
-
-        return json_decode($json);
-    }
-
-    /**
      * Call for get player code.
      *
      * @param int $cmid
@@ -106,56 +83,11 @@ class cloudstudio_media_video {
                 'sandbox="allow-scripts allow-same-origin allow-popups"',
                 'allow=":encrypted-media; :picture-in-picture"',
                 'frameborder="0" allowfullscreen',
-                'style="width:100%;height:calc(100vw * 0.563);"',
+                'style="width:100%;height:calc(100vw * .5625);"',
             ],
             "identifier" => $identifier,
             "token" => $token,
             "url" => self::get_url(),
         ]);
-    }
-
-    /**
-     * Curl execution.
-     *
-     * @param string $baseurl
-     * @param array $query
-     *
-     * @param string $protocol
-     *
-     * @return string
-     * @throws \dml_exception
-     */
-    private static function load($baseurl, $query = null, $protocol = "GET") {
-        $config = get_config("cloudstudio");
-
-        $ch = curl_init();
-
-        $query = http_build_query($query, "", "&");
-
-        if ($protocol == "POST") {
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
-
-            $queryurl = "";
-        } else if ($query) {
-            $queryurl = "?{$query}";
-        }
-
-        $url = self::get_url();
-        curl_setopt($ch, CURLOPT_URL, "https://{$url}/{$baseurl}{$queryurl}");
-
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $protocol);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "authorization:{$config->token}",
-        ]);
-
-        $output = curl_exec($ch);
-        curl_close($ch);
-
-        return $output;
     }
 }
