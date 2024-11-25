@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use media_cloudstudio\local\cloudstudio_media_video;
+use mod_cloudstudio\local\util\cloudstudio_api;
 
 
 /**
@@ -41,8 +41,8 @@ class media_cloudstudio_plugin extends core_media_player_external {
     public function list_supported_urls(array $urls, array $options = []) {
         $result = [];
         foreach ($urls as $url) {
-            // If cloudstudio support is enabled, URL is supported.
 
+            // If cloudstudio support is enabled, URL is supported.
             if (strpos($url->get_host(), ".cloudstudio.com.br") > 0) {
                 $result[] = $url;
             } else if ($url->get_host() === "player.cloudstudio.com.br") {
@@ -65,31 +65,18 @@ class media_cloudstudio_plugin extends core_media_player_external {
      * @return string
      */
     protected function embed_external(moodle_url $url, $name, $width, $height, $options) {
-        global $USER, $COURSE;
-
-        $config = get_config("cloudstudio");
-
-        $safetyplayer = "";
-        if ($config->safety && $config->safety != "none") {
-            $safety = $config->safety;
-            if (strpos($safety, "profile") === 0) {
-                $safety = str_replace("profile_", "", $safety);
-                $safetyplayer = $USER->profile->$safety;
-            } else {
-                $safetyplayer = $USER->$safety;
-            }
-        }
+        global $COURSE;
 
         preg_match('/\/\w+\/\w+\/([A-Z0-9\-\_]{3,255})/', $url->get_path(), $path);
         if (isset($path[0])) {
             $identifier = $path[1];
-            return cloudstudio_media_video::getplayer($COURSE->id, $identifier, $safetyplayer);
+            return cloudstudio_api::getplayer($COURSE->id, $identifier);
         }
 
         preg_match('/\/\w+\/([A-Z0-9\-\_]{3,99})/', $url->get_path(), $path);
         if (isset($path[0])) {
             $identifier = $path[1];
-            return cloudstudio_media_video::getplayer($COURSE->id, $identifier, $safetyplayer);
+            return cloudstudio_api::getplayer($COURSE->id, $identifier);
         }
     }
 
