@@ -33,11 +33,11 @@ namespace media_cloudstudio\local;
 class cloudstudio_media_video {
 
     /**
-     * Function getUrl
+     * Function get_url
      *
      * @return mixed|string
      */
-    public static function getUrl() {
+    public static function get_url() {
         $config = get_config("cloudstudio");
         $url = trim($config->urlcloudstidio);
         if (!preg_match('/^https?:/', $url)) {
@@ -105,10 +105,12 @@ class cloudstudio_media_video {
             "tags" => [
                 'sandbox="allow-scripts allow-same-origin allow-popups"',
                 'allow=":encrypted-media; :picture-in-picture"',
+                'frameborder="0" allowfullscreen',
+                'style="width:100%;height:calc(100vw * 0.563);"',
             ],
             "identifier" => $identifier,
             "token" => $token,
-            "url" => self::getUrl(),
+            "url" => self::get_url(),
         ]);
     }
 
@@ -139,7 +141,7 @@ class cloudstudio_media_video {
             $queryurl = "?{$query}";
         }
 
-        $url = self::getUrl();
+        $url = self::get_url();
         curl_setopt($ch, CURLOPT_URL, "https://{$url}/{$baseurl}{$queryurl}");
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $protocol);
