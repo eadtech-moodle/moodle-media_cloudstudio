@@ -38,18 +38,12 @@ git clone https://github.com/eadtech-moodle/moodle-media_cloudstudio.git
 - Navigate to **Site Administration > Notifications**.
 - Follow the steps provided to complete the installation.
 
-### 4. Enable the media player
+### 4. Enable the Repository
 
-After installation, follow these steps to enable the player:
+After installation, follow these steps to enable the Repository:
 
 1. Go to **Site Administration** > **Media Players** > **Manage Media Players**.
 2. Activate the **CloudStudio Filter Player** option.
-
-## How to Use
-
-1. Once the media player is activated, you can use the CloudStudio player in any Moodle text editor.
-2. Add a CloudStudio video, configure the display options, and save the changes.
-3. The video will be displayed using the configured player.
 
 ## Support
 
