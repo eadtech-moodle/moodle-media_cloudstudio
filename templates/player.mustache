@@ -27,44 +27,8 @@
 }}
 <div style="width:100%;display: flex;justify-content: center;">
     <iframe id="ottflix-iframe-{{{identifier}}}"
-            width="100%" style="height: calc(100vw * 0.563);"
+            style="width:100%;height:calc(100vw * 0.563);"
             frameborder="0" allowfullscreen
-            sandbox="allow-scripts allow-same-origin allow-popups"
-            allow=":encrypted-media; :picture-in-picture"
+            {{#tags}}{{.}}{{/tags}}
             src="https://{{url}}/Share/player/{{identifier}}?token={{token}}"></iframe>
 </div>
-
-{{#js}}
-    //<script>
-    require(["jquery"], function($) {
-        function resize{{{identifier}}}() {
-            var newHeight = $(window).height() - 100;
-            if (newHeight < 300) newHeight = 300;
-            if (lastHeight > lastHeight) newHeight = lastHeight;
-            if (newHeight < lastHeight) {
-                $("#ottflix-iframe-{{{identifier}}}").css({
-                    height : newHeight + "px",
-                    width  : "100%",
-                });
-            } else {
-                var newVidth = (newHeight / 9) * 16;
-                if (newVidth > $(window).width()) {
-                    var newHeight2 = ($(window).width() / 16) * 9;
-                    $("#ottflix-iframe-{{{identifier}}}").css({
-                        height : newHeight2 + "px",
-                        width  : "100%",
-                    });
-                } else {
-                    $("#ottflix-iframe-{{{identifier}}}").css({
-                        height : newHeight + "px",
-                        width  : newVidth + "px",
-                    });
-                }
-            }
-        }
-
-        var lastHeight = $("#ottflix-iframe-{{{identifier}}}").height();
-        $(window).resize(resize{{{identifier}}});
-        resize{{{identifier}}}();
-    });
-{{/js}}
