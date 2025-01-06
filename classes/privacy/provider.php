@@ -54,13 +54,13 @@ class provider implements
     public static function get_metadata(collection $collection): collection {
 
         $collection->add_external_location_link(
-            'cloudstudio.com.br',
+            "cloudstudio.com.br",
             [
-                'aluno_matricula' => 'privacy:metadata:cloudstudio_view:user_id',
-                'aluno_nome' => 'privacy:metadata:cloudstudio_view:user_name',
-                'aluno_email' => 'privacy:metadata:cloudstudio_view:user_email',
+                "aluno_matricula" => "privacy:metadata:cloudstudio_view:user_id",
+                "aluno_nome" => "privacy:metadata:cloudstudio_view:user_name",
+                "aluno_email" => "privacy:metadata:cloudstudio_view:user_email",
             ],
-            'privacy:metadata:cloudstudio_view',
+            "privacy:metadata:cloudstudio_view",
             );
 
         return $collection;

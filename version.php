@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024112500;
+$plugin->version = 2025010600;
 $plugin->requires = 2020061500;
 $plugin->component = "media_cloudstudio";
-$plugin->release = '1.0.3';
+$plugin->release = "1.0.4";
 $plugin->maturity = MATURITY_STABLE;
 
 $plugin->dependencies = [

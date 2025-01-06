@@ -31,7 +31,7 @@
 function xmldb_media_cloudstudio_install() {
     global $CFG;
 
-    $order = (!empty($CFG->media_plugins_sortorder)) ? explode(',', $CFG->media_plugins_sortorder) : [];
+    $order = (!empty($CFG->media_plugins_sortorder)) ? explode(",", $CFG->media_plugins_sortorder) : [];
     array_unshift($order, "cloudstudio");
 
     set_config("media_plugins_sortorder", implode(",", $order));
