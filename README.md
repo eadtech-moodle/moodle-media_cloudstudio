@@ -54,5 +54,5 @@ After installation, follow these steps to enable the Repository:
 
 This project is licensed under **GPL v3**. Refer to the [LICENSE](LICENSE) file for more details.
 
-**Created by: [EadTech Moodle](https://github.com/eadtech-moodle)**  
+**Created by: [EadTech](https://github.com/eadtech-moodle)**  
 Making learning more interactive! 🎓
